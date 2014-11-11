@@ -18,6 +18,7 @@ public class Trading {
 		Trade ourTrade;
 		int quantityToTrade;
 		while (comparison < 1){ //If the buying price is greater than or equal to the selling price
+			
 			quantityToTrade = Math.min(SellPQ.peek().getQuantity(), BuyPQ.peek().getQuantity());
 			ourTrade = new Trade(SellPQ.peek().getPrice(), quantityToTrade);
 			TradeList.add(ourTrade);
@@ -47,11 +48,13 @@ public class Trading {
 		int order = 0; //keep track of the order
 		Buy BuyObject; //Might be a buy object
 		Sell SellObject; //Might be a sell object
+		System.out.println("On Input:");
 		for (int x=0; x< args.length; x=x+3){ //iterate across the inputs of buy and sell orders
 			if (args[x].equals("buy")){ //Check if buy object, then find the two integers following it
 				int price = Integer.parseInt(args[(x+1)]);
 				int quantity = Integer.parseInt(args[(x+2)]);
 				BuyObject = new Buy(price, quantity, order); //Create the object
+				System.out.println("(Buy,"+BuyObject.printOrders()+")");
 				order++;
 				BuyOffers.add(BuyObject);
 				//System.out.println(BuyObject.toString());
@@ -61,6 +64,7 @@ public class Trading {
 				int price = Integer.parseInt(args[(x+1)]);
 				int quantity = Integer.parseInt(args[(x+2)]);
 				SellObject = new Sell(price, quantity, order); //Create the object
+				System.out.println("(Sell,"+SellObject.printOrders()+")");
 				order++;
 				//System.out.println(SellObject.toString());
 				SellOffers.add(SellObject);
@@ -70,10 +74,11 @@ public class Trading {
 				return;
 			}
 		}
-		PriorityQueue<Buy> BuyPQ= new PriorityQueue<Buy>(BuyOffers.size(),Collections.reverseOrder());
-		PriorityQueue<Sell> SellPQ= new PriorityQueue<Sell>(SellOffers.size());
+		PriorityQueue<Buy> BuyPQ= new PriorityQueue<Buy>(BuyOffers.size()+1,Collections.reverseOrder()); // +1 for size  in case of empty lists
+		PriorityQueue<Sell> SellPQ= new PriorityQueue<Sell>(SellOffers.size()+1);// +1 for size  in case of empty lists
 		boolean b1 = BuyOffers.isEmpty();
 		boolean b2 = SellOffers.isEmpty();
+		System.out.println("\n The sequence of sales is:");
 		while (!b1 || !b2){ //Change this later on to a while loop with a bunch of conditions that we don't yet fully understand
 			if (b1){
 				SellPQ.add(SellOffers.remove(0));
@@ -91,20 +96,22 @@ public class Trading {
 			b1 = BuyOffers.isEmpty();
 			b2 = SellOffers.isEmpty();
 		}
-		System.out.println("The outstanding buy orders include:");
-		while (BuyPQ.isEmpty()==false){ // printing out the outstanding Buy orders
-			Buy printobject;
-			printobject = BuyPQ.peek();
-			System.out.println(printobject.printBuy());
-			BuyPQ.poll();
-		}
-		System.out.println("The outstanding sell orders include:");
+		
+		System.out.println(" \n The outstanding sell orders are:");
 		while (SellPQ.isEmpty()==false){ // Printing out the outstanding Sell orders
 			
 			Sell printobject;
 			printobject = SellPQ.peek();
-			System.out.println(printobject.printSell());
+			System.out.println("("+printobject.printOrders()+")");
 			SellPQ.poll();
+		}
+		
+		System.out.println(" \n The outstanding buy orders are:");
+		while (BuyPQ.isEmpty()==false){ // printing out the outstanding Buy orders
+			Buy printobject;
+			printobject = BuyPQ.peek();
+			System.out.println("("+printobject.printOrders()+")");
+			BuyPQ.poll();
 		}
 		
 	}

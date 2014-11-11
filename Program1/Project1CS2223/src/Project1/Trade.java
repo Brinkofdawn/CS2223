@@ -21,6 +21,6 @@ public class Trade {
 }
 	
 	public String toString(){
-		return quantity+" units of the stock were sold at the price of "+price+".";
+		return "("+this.getPrice()+","+this.getQuantity()+")";
 	}
 }

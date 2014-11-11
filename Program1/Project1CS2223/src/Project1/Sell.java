@@ -6,7 +6,5 @@ public class Sell extends Bid{
 		super(price, quantity, order);
 	}
 	
-	public String printSell(){
-		return "Sell order of price "+this.getPrice()+ " and quantity of "+this.getQuantity();
-	}
+	
 }

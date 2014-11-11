@@ -6,7 +6,4 @@ public class Buy extends Bid{
 		super(price, quantity, order);
 	}
 	
-	public String printBuy(){
-		return "Buy order of price "+this.getPrice()+ " and quantity of "+this.getQuantity();
-	}
 }

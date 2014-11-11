@@ -25,6 +25,10 @@ public abstract class Bid implements Comparable<Bid> {
 	public String toString(){
 		return "Bid object that is "+price+" "+quantity+" "+order;
 	}
+	
+	public String printOrders(){
+		return this.getPrice()+","+this.getQuantity();
+	}
 	//Takes a value to decrement Quantity by, returning true if the Quantity is 0.
 	public boolean decrementQuantity(int amount){
 		quantity-=amount;
