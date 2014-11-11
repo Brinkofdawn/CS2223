@@ -1,5 +1,11 @@
 package Project1;
 
+/* Arun Donti
+ * Arthur Dooner 
+ * CS2223
+ */
+
+
 import java.util.*;
 import java.io.*;
 import java.math.*;
@@ -7,7 +13,7 @@ import java.math.*;
 
 public class Trading {
 	
-	public static ArrayList<Trade> makeTrades(PriorityQueue<Buy> BuyPQ, PriorityQueue<Sell> SellPQ){
+	public static ArrayList<Trade> makeTrades(PriorityQueue<Buy> BuyPQ, PriorityQueue<Sell> SellPQ){ // makes the trades with the Sell PQ and Buy PQ
 		ArrayList<Trade> TradeList = new ArrayList<Trade>();
 		//System.out.println("We have made it to makeTrades");
 		if (BuyPQ.isEmpty() || SellPQ.isEmpty()){
@@ -42,13 +48,12 @@ public class Trading {
 	public static void main(String[] args){
 		ArrayList<Buy> BuyOffers = new ArrayList<Buy>();
 		ArrayList<Sell> SellOffers = new ArrayList<Sell>();
-		
-		
-
 		int order = 0; //keep track of the order
 		Buy BuyObject; //Might be a buy object
 		Sell SellObject; //Might be a sell object
+		
 		System.out.println("On Input:");
+		
 		for (int x=0; x< args.length; x=x+3){ //iterate across the inputs of buy and sell orders
 			if (args[x].equals("buy")){ //Check if buy object, then find the two integers following it
 				int price = Integer.parseInt(args[(x+1)]);
@@ -69,6 +74,7 @@ public class Trading {
 				//System.out.println(SellObject.toString());
 				SellOffers.add(SellObject);
 			}
+			
 			else{ //In case the input was incorrect
 				System.out.println("You failed to format your buy and sell objects properly. Please try again.");
 				return;
@@ -78,7 +84,9 @@ public class Trading {
 		PriorityQueue<Sell> SellPQ= new PriorityQueue<Sell>(SellOffers.size()+1);// +1 for size  in case of empty lists
 		boolean b1 = BuyOffers.isEmpty();
 		boolean b2 = SellOffers.isEmpty();
+		
 		System.out.println("\n The sequence of sales is:");
+		
 		while (!b1 || !b2){ //Change this later on to a while loop with a bunch of conditions that we don't yet fully understand
 			if (b1){
 				SellPQ.add(SellOffers.remove(0));

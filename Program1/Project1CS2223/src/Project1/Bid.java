@@ -1,5 +1,10 @@
 package Project1;
 
+/* Arun Donti
+ * Arthur Dooner 
+ * CS2223
+ */
+
 public abstract class Bid implements Comparable<Bid> {
 	private int price;
 	private int quantity;
@@ -22,23 +27,24 @@ public abstract class Bid implements Comparable<Bid> {
 	public int getOrder() {
 		return order;
 	}
-	public String toString(){
+	/*public String toString(){     // used for debugging purposes
 		return "Bid object that is "+price+" "+quantity+" "+order;
-	}
+	} */
 	
-	public String printOrders(){
+	public String printOrders(){ // To print out the price and quantity of a buy or sell order
 		return this.getPrice()+","+this.getQuantity();
 	}
-	//Takes a value to decrement Quantity by, returning true if the Quantity is 0.
-	public boolean decrementQuantity(int amount){
+	
+	public boolean decrementQuantity(int amount){ // //Takes a value to decrement Quantity by, returning true if the Quantity is 0 (should we remove the item or not).
 		quantity-=amount;
 		if (quantity == 0){
 			return true;
 		}
 		return false;
 	}
+	
 	@Override
-	public int compareTo(Bid y){
+	public int compareTo(Bid y){   // Overriding Priority Queue compare to method in order to sort heaps by price
 		if (this.price < y.getPrice()){
 			return -1;
 		}

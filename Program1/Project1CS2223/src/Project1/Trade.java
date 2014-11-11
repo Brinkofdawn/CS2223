@@ -1,5 +1,10 @@
 package Project1;
 
+/* Arun Donti
+ * Arthur Dooner 
+ * CS2223
+ */
+
 public class Trade {
 	private int price;
 	private int quantity;
@@ -20,7 +25,7 @@ public class Trade {
 	
 }
 	
-	public String toString(){
+	public String toString(){ // makes string containing what happened in the trades
 		return "("+this.getPrice()+","+this.getQuantity()+")";
 	}
 }
