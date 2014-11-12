@@ -1,0 +1,20 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is ahead of 'origin/master' by 1 commit.
+#   (use "git push" to publish your local commits)
+#
+# Changes to be committed:
+#	modified:   Program1/Project1CS2223/bin/Project1/Bid.class
+#	modified:   Program1/Project1CS2223/bin/Project1/Buy.class
+#	modified:   Program1/Project1CS2223/bin/Project1/Sell.class
+#	modified:   Program1/Project1CS2223/bin/Project1/Trade.class
+#	modified:   Program1/Project1CS2223/bin/Project1/Trading.class
+#	modified:   Program1/Project1CS2223/src/Project1/Bid.java
+#	modified:   Program1/Project1CS2223/src/Project1/Buy.java
+#	modified:   Program1/Project1CS2223/src/Project1/Sell.java
+#	modified:   Program1/Project1CS2223/src/Project1/Trade.java
+#	modified:   Program1/Project1CS2223/src/Project1/Trading.java
+#
+
