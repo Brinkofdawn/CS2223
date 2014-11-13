@@ -5,7 +5,6 @@ package Project1;
  * CS2223
  */
 
-
 import java.util.*;
 import java.io.*;
 import java.math.*;
@@ -51,13 +50,29 @@ public class Trading {
 		int order = 0; //keep track of the order
 		Buy BuyObject; //Might be a buy object
 		Sell SellObject; //Might be a sell object
-		
+		String[] inputLines = StdIn.readAllLines();
 		System.out.println("On Input:");
 		
-		for (int x=0; x< args.length; x=x+3){ //iterate across the inputs of buy and sell orders
-			if (args[x].equals("buy")){ //Check if buy object, then find the two integers following it
-				int price = Integer.parseInt(args[(x+1)]);
-				int quantity = Integer.parseInt(args[(x+2)]);
+		for (int x = 0; x < inputLines.length; x++){ //iterate across the input lines of buy and sell orders
+			String[] aLine = inputLines[x].split("[ ]+");
+			if (aLine.length != 3){
+				System.out.println("You formatted a Buy or Sell incorrectly. Please try again in the from 'buy <int> <int>' or 'sell <int> <int>'");
+				return;
+			}
+			if (aLine[0].equals("buy")){ //Check if buy object, then find the two integers following it
+				int price, quantity;
+				try {
+					price = Integer.parseInt(aLine[1]);
+				} catch (NumberFormatException e){
+					System.out.println("You formatted the price on line "+(x+1)+" of your input incorrectly. Please use an integer value for the price.");
+					return;
+				}
+				try {
+					quantity = Integer.parseInt(aLine[2]);
+				} catch (NumberFormatException e){
+					System.out.println("You formatted the quantity on line "+(x+1)+" of your input incorrectly. Please use an integer value for the quantity.");
+					return;
+				}
 				BuyObject = new Buy(price, quantity, order); //Create the object
 				System.out.println("(Buy,"+BuyObject.printOrders()+")");
 				order++;
@@ -65,9 +80,20 @@ public class Trading {
 				//System.out.println(BuyObject.toString());
 			}
 			
-			else if (args[x].equals("sell")){ //Check if sell object, then find the two integers following it
-				int price = Integer.parseInt(args[(x+1)]);
-				int quantity = Integer.parseInt(args[(x+2)]);
+			else if (aLine[0].equals("sell")){ //Check if sell object, then find the two integers following it
+				int price, quantity;
+				try {
+					price = Integer.parseInt(aLine[1]);
+				} catch (NumberFormatException e){
+					System.out.println("You formatted the price on line "+(x+1)+" of your input incorrectly. Please use an integer value for the price.");
+					return;
+				}
+				try {
+					quantity = Integer.parseInt(aLine[2]);
+				} catch (NumberFormatException e){
+					System.out.println("You formatted the quantity on line "+(x+1)+" of your input incorrectly. Please use an integer value for the quantity.");
+					return;
+				}
 				SellObject = new Sell(price, quantity, order); //Create the object
 				System.out.println("(Sell,"+SellObject.printOrders()+")");
 				order++;
@@ -76,7 +102,7 @@ public class Trading {
 			}
 			
 			else{ //In case the input was incorrect
-				System.out.println("You failed to format your buy and sell objects properly. Please try again.");
+				System.out.println("You failed to format your buy and sell object starting on line "+(x+1)+" properly. Please try again.");
 				return;
 			}
 		}
