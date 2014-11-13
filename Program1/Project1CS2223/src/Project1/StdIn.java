@@ -1,12 +1,12 @@
 package Project1;
-<<<<<<< HEAD
+
 /* Arun Donti
  * Arthur Dooner 
  * CS2223
  */
-=======
 
->>>>>>> 7afaccab8feca5f5f741cbc34b2f380500ea8b96
+
+
 /*************************************************************************
  *  Compilation:  javac StdIn.java
  *  Execution:    java StdIn   (interactive test of basic functionality)
@@ -347,38 +347,4 @@ public final class StdIn {
     public static String[] readStrings() {
         return readAllStrings();
     }
-<<<<<<< HEAD
 }
-
-=======
-
-
-    /**
-     * Interactive test of basic functionality.
-     */
-    public static void main(String[] args) {
-
-        System.out.println("Type a string: ");
-        String s = StdIn.readString();
-        System.out.println("Your string was: " + s);
-        System.out.println();
-
-        System.out.println("Type an int: ");
-        int a = StdIn.readInt();
-        System.out.println("Your int was: " + a);
-        System.out.println();
-
-        System.out.println("Type a boolean: ");
-        boolean b = StdIn.readBoolean();
-        System.out.println("Your boolean was: " + b);
-        System.out.println();
-
-        System.out.println("Type a double: ");
-        double c = StdIn.readDouble();
-        System.out.println("Your double was: " + c);
-        System.out.println();
-
-    }
-
-}
->>>>>>> 7afaccab8feca5f5f741cbc34b2f380500ea8b96
