@@ -14,6 +14,7 @@ import java.util.*;
 public class Traversals {
 	
 	static boolean error = false; //Program-wide handler for any errors in the program 
+	static boolean error2 = false;
 	
 		
 	public static void main(String[] args) throws IOException {
@@ -61,18 +62,21 @@ public class Traversals {
 	        	ArrayList<String> result= pre_in_to_post(traversal1, traversal2,traversal2.length);
 	        	if (error==false)
 	        	{
-	        	System.out.println("The pre in to post array is" + result.toString());
+	        	System.out.println("The pre in to post array is " + result.toString());
 	        	}
 	        	if (error==true)
 	        	{
 	        		System.out.println("This tree does not work for Preorder and Inorder to Postorder to create a full tree");
 	        	}
-	        	pre_post_to_in(traversal1, traversal2);
+	        	ArrayList<String> result2 = pre_post_to_in(traversal1, traversal2);
+	        	
 	        }
 	        
 	        else if (readAtLeastOneLine)
-	        {
-	        	search_pre_to_post(traversal1);
+	        {	
+	        	ArrayList<String> finalPOSTArray = new ArrayList<String>();
+	        	finalPOSTArray = search_pre_to_post(traversal1);
+	        	System.out.println("The pre to post array is " + finalPOSTArray.toString());
 	        }
 	        
 	        else
@@ -82,22 +86,40 @@ public class Traversals {
 	        
 	    } //main
 	
-	static ArrayList<String> search_pre_to_post(String[] stringarray)
-	{
-		BST ourBST= new BST(stringarray[0]);
-		for (int i= 1; i<stringarray.length; i++)
-		{
-			ourBST.addpre(stringarray[i]);
+
+	//Implementation of Pre_To_Post provided it is coming from a BST with NO USE of a TREE. 
+	//Returns an ArrayList of String in the post order.
+	static ArrayList<String> search_pre_to_post(String[] stringarray){
+		boolean invalid = false;
+		ArrayList<String> result = new ArrayList<String>();
+		if (stringarray.length > 2){ //checks to see if we have an appropriately sized array
+			int indexToDivide = getDivisionIndex(stringarray); //Gives the index where we should divide the array
+			String[] tempLeft = Arrays.copyOfRange(stringarray, 1, indexToDivide); //Makes the left half and appends to the arraylist
+			String[] tempRight = Arrays.copyOfRange(stringarray, indexToDivide, stringarray.length); //Makes the right and does the same
+			result.addAll(search_pre_to_post(tempLeft));
+			result.addAll(search_pre_to_post(tempRight));
 		}
-		
-		ArrayList<String> finalPOSTArray= ourBST.topost();
-			System.out.println("The pre to post array is" +finalPOSTArray.toString());
-			return finalPOSTArray;
+		else if (stringarray.length == 2){ //In the case we have only 2 elements and should recurse only once.
+				result.addAll(search_pre_to_post(Arrays.copyOfRange(stringarray, 1, 2)));
+		}
+		else if (stringarray.length == 0){ //Catches if we go too far
+			return result;
+		}
+		result.add(stringarray[0]);
+		return result;
 	}
 	
-	
-	
-	
+	static int getDivisionIndex(String[] StringArray){
+		boolean greaterthanRoot = false;
+		int i = 0;
+		while (greaterthanRoot == false && (i <= StringArray.length)){
+			i++;
+			if (StringArray[i].compareTo(StringArray[0]) > 0){
+				greaterthanRoot = true;
+			}
+		}
+		return i;
+	}
 	
 	
 	static ArrayList<String> pre_in_to_post(String[] PreList, String[] InList, int n){
@@ -106,7 +128,7 @@ public class Traversals {
 		ArrayList<String> wrong = new ArrayList<String>();
 
 		int root = search(InList,PreList[0],n);	// find where the tree root is in the Inorder traversal
-		boolean visited1= false; // using booleans to check whether or not trees have either 0 or 2 subtrees in order to make sure outcome is of a valid full tree 
+		boolean visited1 = false; // using booleans to check whether or not trees have either 0 or 2 subtrees in order to make sure outcome is of a valid full tree 
 		boolean	visited2 = false;
 		if (root != 0){ //if the root is not at the beginning of the tree, therefore we can search the left subtree
 			
@@ -122,27 +144,24 @@ public class Traversals {
 			String [] newin = Arrays.copyOfRange(InList, root+1, InList.length+1);
 			result.addAll(pre_in_to_post(newpre, newin, n-root-1));
 			
-			visited2=true; // right node has been visited
+			visited2 = true; // right node has been visited
 		}
 		
 		
-		if (error)
-		{
+		if (error){
 			return wrong; // returning an empty array because it is not a valid tree
 		}
 		
-		if ((visited1 && visited2) || (visited1 ==false && visited2 == false)) // if it is a full tree
-		{	
+		if ((visited1 && visited2) || (visited1 ==false && visited2 == false)) {// if it is a full tree	
 		result.add(PreList[0]);
 		return result;
 		}
 		
-		else // throw error because it isnt a full tree
-		{
+		else {// throw error because it isnt a full tree
 		error=true;
 		return wrong; 
 		}
-		}
+	}
 	
 	
 	
@@ -158,11 +177,6 @@ public class Traversals {
 		}
 		return -1;
 	}
-	
-	
-	
-	
-	
 	
 
 	static ArrayList<String> pre_post_to_in(String[] stringarray1, String[] stringarray2){
@@ -208,7 +222,7 @@ public class Traversals {
 				}
 				ArrayList<String> DONE= ourBT.toInOrder();
 		
-				System.out.println(" The pre post to in array is" +DONE); 
+				System.out.println("The pre post to in array is" +DONE); 
 				return DONE;
 			} 
 			else{
